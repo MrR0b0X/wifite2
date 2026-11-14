@@ -49,6 +49,12 @@ class Color:
         Example:
             Color.p('{R}This text is red. {W} This text is white')
         """
+        if not Color.kalidroid:
+            try:
+                from .input import suppress_terminal_echo_for_messages
+                suppress_terminal_echo_for_messages()
+            except ImportError:
+                pass
         if Color.kalidroid:
             Color._p_kalidroid(text)
             return
@@ -100,6 +106,12 @@ class Color:
         Prints text using colored format with
         leading and trailing new line to STDERR.
         """
+        if not Color.kalidroid:
+            try:
+                from .input import suppress_terminal_echo_for_messages
+                suppress_terminal_echo_for_messages()
+            except ImportError:
+                pass
         sys.stderr.write(Color.s('%s\n' % text))
         Color.last_sameline_length = 0
 
